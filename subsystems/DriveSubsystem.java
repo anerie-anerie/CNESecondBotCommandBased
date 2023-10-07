@@ -25,18 +25,55 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import frc.robot.Constants.DriveConstants;
+
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 public class DriveSubsystem extends SubsystemBase {
   /** Creates a new DriveSubsystem. */
-  private final WPI_VictorSPX leftDriveFront = new WPI_VictorSPX(1);
-  private final WPI_VictorSPX leftDriveBack = new WPI_VictorSPX(2);
-  private final WPI_VictorSPX rightDriveFront = new WPI_VictorSPX(3);
-  private final WPI_VictorSPX rightDriveBack = new WPI_VictorSPX(4);
+  private final WPI_VictorSPX leftDriveFront = new WPI_VictorSPX(FRONT_LEFT_MOTOR_ID);
+  private final WPI_VictorSPX leftDriveBack = new WPI_VictorSPX(BACK_LEFT_MOTOR_ID);
+  private final WPI_VictorSPX rightDriveFront = new WPI_VictorSPX(FRONT_RIGHT_MOTOR_ID);
+  private final WPI_VictorSPX rightDriveBack = new WPI_VictorSPX(BACK_RIGHT_MOTOR_ID);
 
   private final MotorControllerGroup driveLeft = new MotorControllerGroup(leftDriveFront, leftDriveBack);
   private final MotorControllerGroup driveRight = new MotorControllerGroup(rightDriveFront, rightDriveBack);
   private final DifferentialDrive driveRobot = new DifferentialDrive(driveLeft, driveRight);
+
+
+
+
+public DriveSubsystem() {
+  driveRight.setInverted(true);
+  leftDriveFront.setNeutralMode(NeutralMode.Brake);
+  leftDriveBack.setNeutralMode(NeutralMode.Brake);
+  rightDriveFront.setNeutralMode(NeutralMode.Brake);
+  rightDriveBack.setNeutralMode(NeutralMode.Brake);
+
+}
+
+  public CommandBase exampleMethodCommand() {
+  // Inline construction of command goes here.
+  // Subsystem::RunOnce implicitly requires `this` subsystem.
+  return runOnce(
+      () -> {
+        /* one-time action goes here */
+      });
+}
+
+/**
+ * An example method querying a boolean state of the subsystem (for example, a digital sensor).
+ *
+ * @return value of some boolean subsystem state, such as a digital sensor.
+ */
+public boolean exampleCondition() {
+  // Query some boolean state, such as a digital sensor.
+  return false;
+}
+
+@Override
+public void simulationPeriodic() {
+  // This method will be called once per scheduler run during simulation
+}
 }
