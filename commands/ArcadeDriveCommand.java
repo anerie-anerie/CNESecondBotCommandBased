@@ -1,8 +1,13 @@
 package frc.robot.commands;
 //arcade drive command (cap forward speed at 0.7 (axis 1), and turn speed at 0.8 (axis 4)
 
+import frc.robot.subsystems.DriveSubsystem;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+
+import java.util.function.DoubleSupplier;
 
 public class ArcadeDriveCommand extends CommandBase {
+  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private final DriveSubsystem m_driveSubsystem;
     private final DoubleSupplier speedFunction, turnFunction;
 
@@ -24,5 +29,5 @@ public class ArcadeDriveCommand extends CommandBase {
 
 
 }
-
+}
 
